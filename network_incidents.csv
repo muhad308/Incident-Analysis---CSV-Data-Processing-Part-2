@@ -1,0 +1,53 @@
+ticket_id,week_number,site,device_hostname,severity,category,description,reported_by,resolution_minutes,affected_users,cost_sek,impact_score,resolution_notes
+TECH-2024-001,36,Huvudkontor,SW-CORE-01,high,connectivity,Port gi1/0/12 down causing network connectivity issues,Anna Andersson,75,23,"4 567,50",7.2,Replaced faulty ethernet cable on port gi1/0/12
+TECH-2024-002,36,Lager,AP-LAGER-02,critical,wifi,Complete WiFi outage in warehouse area - no wireless connectivity,Björn Björnsson,143,78,"18 945,75",9.1,Access point reboot resolved the issue - investigating root cause
+TECH-2024-003,36,Datacenter,SW-DC-TOR-01,medium,performance,High CPU usage at 85% - performance degradation observed,David Davidsson,130,45,"2 234,25",6.5,Applied configuration optimization to reduce CPU load
+TECH-2024-004,36,Kontor Malmö,AP-MAL-01,low,wifi,Intermittent WiFi disconnections reported by 3 users,Cecilia Carlsson,90,3,"789,00",3.2,Adjusted power settings and channel allocation
+TECH-2024-005,36,Huvudkontor,SW-ACCESS-05,high,connectivity,Multiple ports showing link down status - several users affected,Anna Andersson,75,34,"6 789,25",7.8,Identified loose power connection - secured and tested all ports
+TECH-2024-006,36,Datacenter,SW-DC-TOR-02,critical,performance,Switch unresponsive - causing widespread connectivity issues,David Davidsson,50,156,"23 456,90",9.5,Emergency reboot performed - investigating hardware stability
+TECH-2024-007,36,Lager,RT-LAGER-01,medium,connectivity,WAN interface gi0/1 showing down status,Björn Björnsson,210,,"3 456,75",5.8,ISP confirmed line issue - backup connection activated
+TECH-2024-008,36,Säkerhetskopia,SW-DR-01,low,performance,Minor performance degradation during backup operations,Erik Eriksson,75,8,"1 234,50",2.8,Scheduled maintenance window to optimize backup traffic
+TECH-2024-009,36,Huvudkontor,AP-FLOOR2-02,critical,wifi,Access point serving Floor 2 completely offline,Anna Andersson,45,67,"19 876,50",8.9,Hardware failure confirmed - replacement unit installed
+TECH-2024-010,36,Datacenter,FW-DC-01,high,security,Unusual traffic patterns detected - potential security concern,David Davidsson,135,89,"5 678,25",7.1,False positive from new monitoring rules - adjusted thresholds
+TECH-2024-011,36,Kontor Malmö,SW-MAL-ACC-02,medium,connectivity,Port utilization at 100% - no free ports available,Cecilia Carlsson,100,16,"2 890,00",6.2,Ordered additional switch for expansion - temporary patch cables deployed
+TECH-2024-012,36,Lager,AP-LAGER-01,low,wifi,Reduced signal strength in north corner of warehouse,Björn Björnsson,145,12,"1 567,75",3.5,Adjusted antenna orientation and power levels
+TECH-2024-013,37,Huvudkontor,RT-EDGE-02,high,connectivity,WAN2 interface down - redundancy compromised,Anna Andersson,75,45,"8 234,50",7.6,ISP technician replaced faulty SFP module
+TECH-2024-014,37,Datacenter,SW-DC-TOR-02,critical,hardware,Temperature alarm triggered - potential cooling issue,David Davidsson,95,123,"15 678,75",8.7,HVAC team resolved cooling unit malfunction
+TECH-2024-015,37,Säkerhetskopia,RT-DR-01,medium,connectivity,Backup link showing intermittent connectivity,Erik Eriksson,145,6,"2 345,25",4.8,Cable management issue resolved - improved cable routing
+TECH-2024-016,37,Kontor Malmö,FW-MAL-01,low,security,Certificate expiration warning for SSL inspection,Cecilia Carlsson,45,23,"567,50",2.1,Renewed SSL certificates and updated firewall configuration
+TECH-2024-017,37,Huvudkontor,SW-DIST-02,medium,performance,High memory utilization at 78% during peak hours,Anna Andersson,150,29,"3 123,00",5.9,Cleared old logs and optimized memory usage
+TECH-2024-018,37,Lager,SW-LAGER-02,high,connectivity,Multiple VLAN interfaces down affecting warehouse operations,Björn Björnsson,120,56,"7 890,50",8.1,Configuration rollback performed - scheduled change caused issues
+TECH-2024-019,37,Datacenter,LB-DC-01,medium,performance,Load balancer showing increased response times,David Davidsson,105,78,"4 567,25",6.3,Backend server maintenance completed - performance restored
+TECH-2024-020,37,Huvudkontor,AP-FLOOR1-02,low,wifi,Guest network authentication issues reported,Anna Andersson,80,15,"1 345,75",3.8,RADIUS server timeout increased - authentication working normally
+TECH-2024-021,37,Kontor Malmö,SW-MAL-CORE-01,high,performance,Core switch CPU at 90% - network slowdown observed,Cecilia Carlsson,135,67,"9 876,25",7.9,Identified broadcast storm from misconfigured device
+TECH-2024-022,37,Datacenter,SW-DC-TOR-02,critical,connectivity,Top of rack switch completely unresponsive,David Davidsson,105,189,"34 567,50",9.8,Hardware replacement required - RMA initiated
+TECH-2024-023,37,Lager,RT-LAGER-01,medium,hardware,Router fan making unusual noise - potential failure,Björn Björnsson,115,18,"2 678,90",5.2,Preventive fan replacement performed during maintenance window
+TECH-2024-024,38,Huvudkontor,SW-ACCESS-03,critical,hardware,Switch completely dead - no power LED indicators,Anna Andersson,210,87,"45 678,90",9.6,Hardware failure confirmed - emergency replacement from spare inventory
+TECH-2024-025,38,Säkerhetskopia,FW-DR-01,low,security,VPN tunnel showing occasional disconnects,Erik Eriksson,135,4,"1 890,25",3.1,ISP routing issue identified - alternative path configured
+TECH-2024-026,38,Datacenter,SW-DC-CORE-02,medium,performance,Memory usage climbing steadily over past week,David Davidsson,105,234,"5 234,75",6.8,Memory leak in routing process identified - software update applied
+TECH-2024-027,38,Kontor Malmö,AP-MAL-02,high,wifi,Access point rebooting every 2-3 hours automatically,Cecilia Carlsson,100,43,"6 543,50",7.4,Firmware corruption detected - reflashed with stable version
+TECH-2024-028,38,Lager,SW-LAGER-02,medium,connectivity,VLAN 200 intermittently unreachable from other sites,Björn Björnsson,90,31,"3 789,00",5.7,Trunk port configuration error corrected
+TECH-2024-029,38,Huvudkontor,RT-EDGE-01,low,performance,Slightly elevated latency on WAN connections,Anna Andersson,105,12,"2 156,25",4.1,ISP confirmed network congestion during peak hours - monitoring
+TECH-2024-030,38,Datacenter,FW-DC-02,high,security,Intrusion detection system triggered multiple alerts,David Davidsson,135,145,"8 765,50",7.7,False positives from internal security scan - whitelist updated
+TECH-2024-031,38,Säkerhetskopia,SW-DR-01,medium,performance,Backup traffic causing network congestion,Erik Eriksson,100,7,"2 567,75",4.9,QoS policies adjusted to prioritize business traffic
+TECH-2024-032,38,Kontor Malmö,RT-MAL-01,low,connectivity,BGP neighbor flapping occasionally,Cecilia Carlsson,150,19,"1 789,50",3.6,ISP acknowledged intermittent routing issues - monitoring
+TECH-2024-033,39,Huvudkontor,AP-FLOOR3-01,medium,wifi,5GHz band not broadcasting - only 2.4GHz available,Anna Andersson,105,38,"4 321,25",6.1,Radio module reset resolved the issue - monitoring stability
+TECH-2024-034,37,Datacenter,SW-DC-TOR-02,high,hardware,Power supply redundancy lost - single PSU failure,David Davidsson,105,167,"12 345,75",8.2,Emergency PSU replacement performed - redundancy restored
+TECH-2024-035,36,Lager,AP-LAGER-02,medium,wifi,Wireless performance degraded in loading dock area,Björn Björnsson,135,23,"3 567,50",5.4,Interference from new equipment - channel reallocation performed
+TECH-2024-036,37,Huvudkontor,SW-CORE-01,low,performance,Slight increase in packet loss during evening hours,Anna Andersson,120,28,"2 890,75",4.3,Traffic pattern analysis shows normal business growth
+TECH-2024-037,37,Säkerhetskopia,RT-DR-01,critical,connectivity,Complete loss of connectivity to disaster recovery site,Erik Eriksson,135,15,"24 567,25",9.2,Primary circuit outage - failover to secondary link activated
+TECH-2024-038,38,Kontor Malmö,SW-MAL-ACC-01,medium,hardware,Status LED blinking amber - potential hardware issue,Cecilia Carlsson,75,24,"2 123,50",5.1,Power cycling resolved LED status - monitoring for recurrence
+TECH-2024-039,36,Datacenter,LB-DC-02,high,performance,Load balancer failover not working correctly,David Davidsson,135,198,"11 234,25",8.4,Configuration sync issue between HA pair - manual sync performed
+TECH-2024-040,37,Lager,RT-LAGER-01,critical,connectivity,Complete router failure - no network access at site,Björn Björnsson,135,89,"28 765,50",9.4,Hardware replacement from emergency stock - investigating cause
+TECH-2024-041,37,Huvudkontor,FW-DMZ-01,medium,security,DMZ firewall rules blocking legitimate traffic,Anna Andersson,75,52,"3 456,90",6.4,Rule conflict identified and resolved - traffic restored
+TECH-2024-042,38,Datacenter,SW-DC-TOR-01,low,performance,Minor performance degradation during overnight backups,David Davidsson,135,67,"1 987,25",3.9,Backup schedule optimized to reduce network impact
+TECH-2024-043,38,Säkerhetskopia,FW-DR-01,high,hardware,Firewall running at high temperature - cooling concerns,Erik Eriksson,95,11,"7 654,75",7.3,Datacenter cooling system maintenance scheduled
+TECH-2024-044,36,Kontor Malmö,AP-MAL-01,critical,wifi,Complete wireless outage affecting entire Malmö office,Cecilia Carlsson,165,76,"21 345,50",9.3,Controller software crash - emergency restart and patch applied
+TECH-2024-045,37,Lager,SW-LAGER-01,medium,connectivity,Inter-VLAN routing issues causing application problems,Björn Björnsson,90,41,"4 678,25",6.6,Routing table corruption cleared - service restored
+TECH-2024-046,38,Huvudkontor,AP-FLOOR2-02,high,hardware,Access point physically damaged - suspected impact damage,Anna Andersson,135,59,"9 234,50",8.0,Physical inspection confirmed - replacement unit installed
+TECH-2024-047,38,Datacenter,SW-DC-CORE-01,medium,performance,Core switch showing intermittent packet drops,David Davidsson,105,123,"5 789,75",6.7,Buffer utilization high during peak - QoS tuning applied
+TECH-2024-048,36,Säkerhetskopia,SW-DR-01,low,hardware,Fan speed fluctuating - potential bearing wear,Erik Eriksson,105,5,"1 456,25",2.7,Preventive maintenance scheduled - fan replacement planned
+TECH-2024-049,36,Kontor Malmö,RT-MAL-01,critical,hardware,Router experiencing random reboots - hardware instability,Cecilia Carlsson,105,58,"26 789,75",9.0,Power supply issue identified - emergency replacement performed
+TECH-2024-050,37,Lager,AP-LAGER-01,medium,performance,Reduced throughput on wireless connections,Björn Björnsson,90,19,"2 789,50",5.3,Firmware update applied - performance issue resolved
+TECH-2024-051,38,Huvudkontor,SW-DIST-01,low,connectivity,Single port intermittently dropping link,Anna Andersson,100,8,"1 678,75",3.4,Cable and port inspection performed - connection stabilized
+TECH-2024-052,39,Datacenter,FW-DC-01,high,security,Firewall blocking critical business application traffic,David Davidsson,90,178,"8 456,25",8.3,Emergency rule modification applied - investigating policy conflicts
