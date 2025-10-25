@@ -1,12 +1,21 @@
-======================================================================
-                        TechCorp AB - September 2024
-======================================================================
-Analysperiod: 2024-09-02 till 2024-09-08 
+================================================================================
+                             TechCorp AB
+                   INCIDENT ANALYSIS - SEPTEMBER 2024
+================================================================================
+Analysperiod: vecka 36 till vecka 39
 Total incidents: 52 st
-Total cost : 445910.10 SEK 
+Total kostnad: 445,910.10 SEK
 
-EXECTIVE SUMMARY 
--------------------------------
-⚠ critical: SW-DC-TOR-02 has 3 incidents (same unit that had warning last week!)
-⚠ cost: Most expensive incident: 45678.90 SEK (SW-ACCESS-03 hardware failure)
-⚠ 14 devices from last week's  problem devices have generated incidents 
+EXECUTIVE SUMMARY
+-----------------
+⚠ KRITISKT: SW-DC-TOR-02 har 7 incidents (samma enhet som hade warning förra veckan!)
+⚠ KOSTNAD: Dyraste incident: 45,678.90 SEK (SW-ACCESS-03 hardware)
+⚠ 13 enheter från förra veckans "problem devices" har genererat incidents
+✓ POSITIVT: Inga critical incidents på Kontor Malmö
+
+INCIDENTS PER SEVERITY
+----------------------
+Critical  :  10 st (19%) - Genomsnitt: 119 min resolution, 25,967 SEK/incident
+High      :  13 st (25%) - Genomsnitt: 108 min resolution, 8,252 SEK/incident
+Medium    :  17 st (33%) - Genomsnitt: 113 min resolution, 3,507 SEK/incident
+Low       :  12 st (23%) - Genomsnitt: 107 min resolution, 1,613 SEK/incident

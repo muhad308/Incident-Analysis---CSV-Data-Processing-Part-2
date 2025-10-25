@@ -1,0 +1,6 @@
+site,total_incidents,critical_incidents,high_incidents,medium_incidents,low_incidents,avg_resolution_minutes,total_cost_sek
+Huvudkontor,13,2,4,3,4,104,113353.8
+Lager,10,2,1,6,1,127,78129.4
+Datacenter,13,3,5,4,1,110,139996.4
+Kontor Malmö,9,2,2,2,3,107,72714.5
+Säkerhetskopia,7,1,1,2,3,113,41716.0

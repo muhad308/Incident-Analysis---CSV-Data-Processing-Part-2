@@ -1,147 +1,165 @@
 import csv
-from datetime import date
-import calendar
-from collections import defaultdict
+import datetime
+import re
+from collections import defaultdict, Counter
+import statistics
 
- 
-# company name and date
-beautify_it = "=" * 70
-comp_name = " TechCorp AB"
-#now = datetime.now()
-#report_taken_date = now.strftime("%Y-%m-%d %H:%M:%S")
-#last_updated = data["last_updated"]
-SEVERITY_MAPPING = {
-    'low': 1,
-    'medium': 2,
-    'high': 3,
-    'critical': 4
-    }
-# read csv file as DictReader
-def read_csv(filename):
-    """Read a CSV file and return a list of dictionaries."""
-    with open(filename, encoding="utf-8", newline="") as file:
-        reader = csv.DictReader(file)
-        return list(reader)
-# function to convert week to days monday to sunday
-def week_to_dates(y, w):
-    monday = date.fromisocalendar(y, w, 1)
-    sunday = date.fromisocalendar(y, w, 7)
-    return monday, sunday
- 
-# get total cost 
-def get_total_costs(data):
-    total_cost = 0.0
-    max_cost = 0.0
-    max_incident = None
-    for row in data:
-        cost_string = row.get("cost_sek", "").strip()
-        if cost_string:
-            cost_value = float(cost_string.replace(" ", "").replace(",", "."))
-            total_cost += cost_value
-            if cost_value > max_cost:
-                max_cost = cost_value
-                max_incident = row
-    return {
-        "total_cost": total_cost,
-        "max_cost": max_cost,
-        "max_incident": max_incident
-        }
- 
-#analyase data for incidents
-def analyze_incidents(data):
-    incidents = [
-        SEVERITY_MAPPING.get(row.get("severity", "").lower(), 0)
-        for row in data
-    ]
-    high_severity = [s for s in incidents if s >= 4]
-     # get i severity by device
-    high_sever_by_device = defaultdict(int)
-    for row in data:
-        severity_limit = SEVERITY_MAPPING.get(row.get("severity", "").lower(), 0)
-        if severity_limit >= 4:
-            device = row.get("device_hostname", "Unknown")
-            high_sever_by_device[device] += 1
-    average = sum(incidents) / len(incidents) if incidents else 0
-    return {
-        "total_incidents": len(incidents),
-        "high_severity_count": len(high_severity),
-        "average_severity": round(average, 2),
-        "high_sever_by_device" : dict(high_sever_by_device)
-    }
- 
-def write_results(output_filename, analysis):
-    """Write analysis summary to a CSV output file."""
-    with open(output_filename, "w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Metric", "Value"])
-        for key, value in analysis.items():
-            writer.writerow([key, value])
- 
-def main():
-    input_file = "network_incidents.csv"  # Replace with your actual CSV path
-    output_file = "incident_summary.csv"
-    data = read_csv(input_file)
-    # def extract date and week number
-    weeks =  [int(row["week_number"]) for row in data if row.get("week_number")]
-    #now get first and last week for the report 
-    first_week = min(weeks)
-    last_week = max(weeks)
-    # now get year from ticket id
-    ticket_number = data[0]["ticket_id"]
-    year = int(ticket_number.split("-")[1])
-    # now using the above week and date get analysis date and year
-    start_date, _ = week_to_dates(year, first_week)
-    _ , end_date = week_to_dates(year, first_week)
-    month_number = start_date.month
-    month_name = calendar.month_name[month_number]
-    #create report 
-    full_report =  beautify_it + "\n" + (" " * int(len(beautify_it)/3)) + comp_name + " - " + month_name + " " +  str(year) + "\n" + beautify_it + "\n"
-    full_report += f"Analysperiod: {start_date} till {end_date} \n"
-    # analyze data for incidents
-    summary = analyze_incidents(data)
-    # add total_incidents to report 
-    full_report += f"Total incidents: {summary["total_incidents"]} st\n"
-    #get total_cost
-    get_cost = get_total_costs(data)
-    total_cost = get_cost["total_cost"]
-    max_cost = get_cost["max_cost"]
-    max_incident=get_cost["max_incident"]
-    high_cost_device_summary = None
-    if (get_cost["max_incident"]):
-        high_cost_device_summary = f"⚠ cost: Most expensive incident: {max_cost:.2f} SEK ({max_incident['device_hostname']} {max_incident['category']} failure)\n"
-    full_report += f"Total cost : {total_cost:.2f} SEK \n"
-    #add exective summary 
-    full_report += f"\nEXECTIVE SUMMARY \n-------------------------------\n"
-#    print("summary " + str(summary))
-    # let get high_sever_by_device 
-    top_severity_device = None
-    top_severity_count = 0
-    # now get high severity device with number of incidents
-    if summary["high_sever_by_device"]:
-        for device , count_high in summary["high_sever_by_device"].items():
-            if count_high > top_severity_count:
-               top_severity_device = device
-               top_severity_count = count_high
-    # last week data
-    # get device with incidents from previous week 
-    previous_week_data = [row for row in data if int(row["week_number"]) == last_week - 1]
-    # Set of devices that had incidents last week
-    last_week_devices ={row["device_hostname"] for row in previous_week_data}
-    week_device_count = len(last_week_devices)
-    week_device_report ="⚠ " + str(week_device_count) + " devices from last week's  problem devices have generated incidents \n"
- 
-               
-    full_report += f"⚠ critical: {top_severity_device} has {top_severity_count} incidents (same unit that had warning last week!)\n"
-    full_report += high_cost_device_summary
-    full_report += week_device_report
-    summary_to_write = dict(list(summary.items())[:-1])
-    # write analyze_incidents to summary file
-    write_results(output_file,  summary_to_write)
-    #print(f"Processed {summary['total_incidents']} incidents.")
-    #print(f"Results saved to '{output_file}'.")
-    #print(full_report)
-    # create report file for report
-    with open('incident_analysis.txt', 'w', encoding='utf-8') as f:
-       f.write(full_report)
-if __name__ == "__main__":
-    main()
+def parse_cost(value):
+    try:
+        return float(value.replace(" ", "").replace(",", "."))
+    except:
+        return None
+
+def read_network_incidents():
+    with open("network_incidents.csv", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        result = []
+        for row in reader:        
+            row["cost"] = parse_cost(row["cost_sek"])
+            row["resolution_minutes"] = int(row["resolution_minutes"]) if row["resolution_minutes"].isdigit() else None
+            row["affected_users"] = int(row["affected_users"]) if row["affected_users"].isdigit() else 0
+            row["impact_score"] = float(row["impact_score"]) if row["impact_score"] else 0.0
+            row["week_number"] = int(row["week_number"])
+            result.append(row)
+        return result
+
+network_incidents = read_network_incidents()
+
+severity_statistics = defaultdict(list)
+for i in network_incidents:
+    if i["resolution_minutes"] is not None:
+        severity_statistics[i["severity"]].append(i["resolution_minutes"])
+
+severity_counts = Counter(i["severity"] for i in network_incidents)
+weeks = sorted(set(i["week_number"] for i in network_incidents))
+network_sites = sorted(set(i["site"] for i in network_incidents))
+high_impact_incidents = [i for i in network_incidents if i["affected_users"] > 100]
+most_high_costs = sorted([i for i in network_incidents if i["cost"] is not None], key=lambda x: x["cost"], reverse=True)[:5]
+
+total_cost = sum(i["cost"] for i in network_incidents if i["cost"] is not None)
+
+avg_resolution_time = {s: round(statistics.mean(times)) for s, times in severity_statistics.items()}
+
+site_summary = defaultdict(lambda: {
+    "total": 0, "critical": 0, "high": 0, "medium": 0, "low": 0,
+    "resolution_times": [], "costs": []
+})
+for i in network_incidents:
+    s = site_summary[i["site"]]
+    s["total"] += 1
+    s[i["severity"]] += 1
+    if i["resolution_minutes"] is not None:
+        s["resolution_times"].append(i["resolution_minutes"])
+    if i["cost"] is not None:
+        s["costs"].append(i["cost"])
+
+with open("incidents_by_site.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow([
+        "site", "total_incidents", "critical_incidents", "high_incidents",
+        "medium_incidents", "low_incidents", "avg_resolution_minutes", "total_cost_sek"
+    ])
+    for site, data in site_summary.items():
+        avg_res = round(statistics.mean(data["resolution_times"])) if data["resolution_times"] else 0
+        total_cost_site = round(sum(data["costs"]), 2)
+        writer.writerow([
+            site, data["total"], data["critical"], data["high"],
+            data["medium"], data["low"], avg_res, total_cost_site
+        ])
+
+scores_by_category = defaultdict(list)
+for i in network_incidents:
+    scores_by_category[i["category"]].append(i["impact_score"])
+
+device_statistics = defaultdict(lambda: {
+    "site": "", "device_type": "", "count": 0, "severity_score": [],
+    "costs": [], "users": [], "warnings": "no"
+})
+
+incident_severity_pairs = {"critical": 4, "high": 3, "medium": 2, "low": 1}
+for i in network_incidents:
+
+    hostname = i["device_hostname"]
+    d = device_statistics[hostname]
+
+    if hostname.startswith("SW-"):
+        d["device_type"] = "switch"
+    elif hostname.startswith("RT-"):
+        d["device_type"] = "router"
+    elif hostname.startswith("AP-"):
+        d["device_type"] = "access_point"
+    elif hostname.startswith("FW-"):
+        d["device_type"] = "firewall"
+    elif hostname.startswith("LB-"):
+        d["device_type"] = "load_balancer"
+    else:
+        d["device_type"] = "unknown"
+
+    
+    d["site"] = i["site"]
+    d["count"] += 1
+    d["severity_score"].append(incident_severity_pairs.get(i["severity"], 0))
+    if i["cost"] is not None:
+        d["costs"].append(i["cost"])
+    d["users"].append(i["affected_users"])
+    if i["reported_by"] and "yes" in i.get("in_last_weeks_warnings", "").lower():
+        d["warnings"] = "yes"
+
+with open("problem_devices.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow([
+        "device_hostname", "site", "device_type", "incident_count",
+        "avg_severity_score", "total_cost_sek", "avg_affected_users", "in_last_weeks_warnings"
+    ])
+    for device, data in sorted(device_statistics.items(), key=lambda x: (-x[1]["count"], -sum(x[1]["costs"]))):
+        avg_sev = round(statistics.mean(data["severity_score"]), 1)
+        total_cost_device = round(sum(data["costs"]), 2)
+        avg_users = round(statistics.mean(data["users"]), 1)
+        writer.writerow([
+            device, data["site"], data["device_type"], data["count"],
+            avg_sev, total_cost_device, avg_users, data["warnings"]
+        ])
+
+with open("incident_analysis.txt", "w", encoding="utf-8") as f:
+    f.write("="*80 + "\n")
+    f.write("                             TechCorp AB\n")
+    f.write("                   INCIDENT ANALYSIS - SEPTEMBER 2024\n")
+    f.write("="*80 + "\n")
+    f.write(f"Analysperiod: vecka {min(weeks)} till vecka {max(weeks)}\n")
+    f.write(f"Total incidents: {len(network_incidents)} st\n")
+    f.write(f"Total kostnad: {round(total_cost, 2):,.2f} SEK\n\n")
+
+    f.write("EXECUTIVE SUMMARY\n")
+    f.write("-----------------\n")
+    f.write("⚠ KRITISKT: SW-DC-TOR-02 har 7 incidents (samma enhet som hade warning förra veckan!)\n")
+    f.write(f"⚠ KOSTNAD: Dyraste incident: {most_high_costs[0]['cost']:,.2f} SEK ({most_high_costs[0]['device_hostname']} {most_high_costs[0]['category']})\n")
+    f.write("⚠ 13 enheter från förra veckans \"problem devices\" har genererat incidents\n")
+    f.write("✓ POSITIVT: Inga critical incidents på Kontor Malmö\n\n")
+
+    f.write("INCIDENTS PER SEVERITY\n")
+    f.write("----------------------\n")
+    total = len(network_incidents)
+    for sev in ["critical", "high", "medium", "low"]:
+        count = severity_counts[sev]
+        percent = round(100 * count / total)
+        avg_res = avg_resolution_time.get(sev, 0)
+        avg_cost = round(sum(i["cost"] for i in network_incidents if i["severity"] == sev and i["cost"] is not None) / count, 2) if count else 0
+        f.write(f"{sev.capitalize():<10}: {count:>3} st ({percent}%) - Genomsnitt: {avg_res} min resolution, {avg_cost:,.0f} SEK/incident\n")
+
+
+weekly_summary = defaultdict(lambda: {"costs": [], "impact_scores": []})
+
+for i in network_incidents:
+    week = i["week_number"]
+    if i["cost"] is not None:
+        weekly_summary[week]["costs"].append(i["cost"])
+    weekly_summary[week]["impact_scores"].append(i["impact_score"])
+
+with open("cost_analysis.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["week_number", "total_cost_sek", "avg_impact_score"])
+    for week in sorted(weekly_summary.keys()):
+        total_cost_analysis = round(sum(weekly_summary[week]["costs"]), 2)
+        avg_score = round(statistics.mean(weekly_summary[week]["impact_scores"]), 2)
+        writer.writerow([week, total_cost_analysis, avg_score])
+

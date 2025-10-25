@@ -1,0 +1,35 @@
+device_hostname,site,device_type,incident_count,avg_severity_score,total_cost_sek,avg_affected_users,in_last_weeks_warnings
+SW-DC-TOR-02,Datacenter,switch,4,3.8,86048.9,158.8,no
+RT-LAGER-01,Lager,router,3,2.7,34901.15,35.7,no
+SW-DR-01,Säkerhetskopia,switch,3,1.3,5258.5,6.7,no
+AP-FLOOR2-02,Huvudkontor,access_point,2,3.5,29111.0,63,no
+RT-MAL-01,Kontor Malmö,router,2,2.5,28579.25,38.5,no
+RT-DR-01,Säkerhetskopia,router,2,3,26912.5,10.5,no
+AP-LAGER-02,Lager,access_point,2,3,22513.25,50.5,no
+AP-MAL-01,Kontor Malmö,access_point,2,2.5,22134.5,39.5,no
+FW-DC-01,Datacenter,firewall,2,3,14134.5,133.5,no
+SW-LAGER-02,Lager,switch,2,2.5,11679.5,43.5,no
+FW-DR-01,Säkerhetskopia,firewall,2,2,9545.0,7.5,no
+SW-CORE-01,Huvudkontor,switch,2,2,7458.25,25.5,no
+AP-LAGER-01,Lager,access_point,2,1.5,4357.25,15.5,no
+SW-DC-TOR-01,Datacenter,switch,2,1.5,4221.5,56,no
+SW-ACCESS-03,Huvudkontor,switch,1,4,45678.9,87,no
+LB-DC-02,Datacenter,load_balancer,1,3,11234.25,198,no
+SW-MAL-CORE-01,Kontor Malmö,switch,1,3,9876.25,67,no
+FW-DC-02,Datacenter,firewall,1,3,8765.5,145,no
+RT-EDGE-02,Huvudkontor,router,1,3,8234.5,45,no
+SW-ACCESS-05,Huvudkontor,switch,1,3,6789.25,34,no
+AP-MAL-02,Kontor Malmö,access_point,1,3,6543.5,43,no
+SW-DC-CORE-01,Datacenter,switch,1,2,5789.75,123,no
+SW-DC-CORE-02,Datacenter,switch,1,2,5234.75,234,no
+SW-LAGER-01,Lager,switch,1,2,4678.25,41,no
+LB-DC-01,Datacenter,load_balancer,1,2,4567.25,78,no
+AP-FLOOR3-01,Huvudkontor,access_point,1,2,4321.25,38,no
+FW-DMZ-01,Huvudkontor,firewall,1,2,3456.9,52,no
+SW-DIST-02,Huvudkontor,switch,1,2,3123.0,29,no
+SW-MAL-ACC-02,Kontor Malmö,switch,1,2,2890.0,16,no
+RT-EDGE-01,Huvudkontor,router,1,1,2156.25,12,no
+SW-MAL-ACC-01,Kontor Malmö,switch,1,2,2123.5,24,no
+SW-DIST-01,Huvudkontor,switch,1,1,1678.75,8,no
+AP-FLOOR1-02,Huvudkontor,access_point,1,1,1345.75,15,no
+FW-MAL-01,Kontor Malmö,firewall,1,1,567.5,23,no
